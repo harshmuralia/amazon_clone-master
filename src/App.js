@@ -28,6 +28,7 @@ function App() {
         <>
             <Router>
                 <Routes>
+                    
                     <Route path="/product/:path/:id" element={<AllProducts />}></Route>
                     <Route path="/today-deals" element={<ProductListApp />}></Route>
                     <Route path="/checkout" element={<CheckoutApp />}></Route>
