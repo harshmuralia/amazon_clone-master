@@ -11,6 +11,7 @@ import { RiMapPinUserFill } from "react-icons/ri";
 import { BsCart2 } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
+import { auth } from "../../../../firebase"
 
 function MobileHeaderApp() {
   const { open_nav, cart, user } = useGlobalContext();
@@ -39,7 +40,7 @@ function MobileHeaderApp() {
         <div className='info-menu'>
           <div>
             <h4>
-              {user.auth ? `Hello, ${user.name}` : "Hello, guest "}
+              {auth.currentUser ? `Hello, ${auth.displayName}` : "Hello, guest "}
             </h4>
             <Link
               to={"/login"}

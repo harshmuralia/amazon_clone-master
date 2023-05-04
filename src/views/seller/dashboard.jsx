@@ -1,52 +1,155 @@
-// mobile header
-import MobileHeaderApp from "@/components/template/header/components/MobileHeaderApp";
-// product-slider
-import ProductSlider from "@/components/template/productSlider/ProductSlider";
-// products from data
-import { boostedBoardProducts } from "@/data/ProductSlider/BoostedBoard";
+// // footer
+// import Footer from "@/components/template/footer/Footer";
+// // header
+// import Header_seller from "../../components/template/header/Header_seller";
 
-import { puddleBoardProducts } from "@/data/ProductSlider/PuddleBoard";
+// export default function Dashboard() {
+//   return (
+//     <>
+//       <Header_seller />
 
-import { smartPhoneProducts } from "@/data/ProductSlider/Smartphone";
+//       <Footer />
+//     </>
+//   );
+// }
 
-import { smartWatchProduct } from "@/data/ProductSlider/SmartWatch";
 
-import { chocolateProducts } from "@/data/ProductSlider/Chocolate";
+// // footer
+// import Footer from "@/components/template/footer/Footer";
+// // header
+// import Header_seller from "../../components/template/header/Header_seller";
+// import { useEffect, useState } from "react";
+// import "../../style/Dashboard/Dashboard.css";
 
-import PCRowThree from "@/components/prodcut-category/PCRowThree";
+// export default function Dashboard() {
+//   const [products, setProducts] = useState([]);
 
-import { backpackPorduct } from "@/data/ProductSlider/Backpack";
+//   useEffect(() => {
+//     // Fetch all products uploaded by the logged-in seller from the API
+//     fetch("/api/products")
+//       .then((response) => response.json())
+//       .then((data) => setProducts(data));
+//   }, []);
 
-// product category
-import PCRowOne from "@/components/prodcut-category/PCRowOne";
+//   return (
+//     <>
+//       <Header_seller />
 
-import PCRowTwo from "@/components/prodcut-category/PCRowTwo";
-// product-row
-import ProductRow from "@/components/product-row/ProductRow";
-// products
-import { cameraProduct } from "@/data/ProductSlider/Camera";
+//       <main className="dashboard-container">
+//         <h1>My Products</h1>
+//         <div className="product-list">
+//           {products.map((product) => (
+//             <div className="product-card" key={product.id}>
+//               <img src={product.imageUrl} alt={product.productName} />
+//               <h2>{product.productName}</h2>
+//               <p>{product.description}</p>
+//               <p>Category: {product.category}</p>
+//               <p>Price: ${product.price}</p>
+//             </div>
+//           ))}
+//         </div>
+//       </main>
 
-import { BooksProduct } from "@/data/ProductSlider/Books";
-// header
-import Header from "@/components/template/header/Header";
+//       <Footer />
+//     </>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 // footer
 import Footer from "@/components/template/footer/Footer";
-// sub-menu
-import Menu from "@/components/menu/Menu";
-// hero
-import Hero from "@/components/hero/Hero";
+// header
+import Header_seller from "../../components/template/header/Header_seller";
+import { useEffect, useState } from "react";
+import "../../style/Dashboard/Dashboard.css";
 
-function Dashboard() {
+export default function Dashboard() {
+  const [products, setProducts] = useState([]);
+
+
+
+  
+
+  useEffect(() => {
+    // Fetch all products uploaded by the logged-in seller from the API
+    fetch('http://localhost:8081/products', {
+
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ seller: 'seller_1' })
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+    // fetch("localhost:8081/products")
+    //   .then((response) => response.json())
+    //   .then((data) => setProducts(data));
+  }, []);
+
+  const handleEdit = (productId) => {
+    // Handle edit button click
+    console.log(`Edit product ${productId}`);
+  };
+
+  const handleDelete = (productId) => {
+    // Handle delete button click
+    fetch(`/api/products/${productId}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`Deleted product ${productId}`);
+        setProducts(products.filter((product) => product.id !== productId));
+      });
+  };
+
   return (
     <>
-      {/* Template */}
-      {/* <Header /> */}
-      <Menu />
-      <MobileHeaderApp />
-      
+      <Header_seller />
+
+      <main className="dashboard-container">
+        <h1>My Products</h1>
+        <div className="product-list">
+          {products.map((product) => (
+            <div className="product-card" key={product.id}>
+              <img src={product.imageUrl} alt={product.productName} />
+              <h2>{product.productName}</h2>
+              <p>{product.description}</p>
+              <p>Category: {product.category}</p>
+              <p>Price: ${product.price}</p>
+              <div className="product-buttons">
+                <button
+                  className="edit-button"
+                  onClick={() => handleEdit(product.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(product.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
       <Footer />
     </>
   );
 }
-
-export default Dashboard;

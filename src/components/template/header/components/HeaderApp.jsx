@@ -8,8 +8,12 @@ import { useGlobalContext } from "@/context/useContext";
 
 import { Link } from "react-router-dom";
 
+import { auth } from "../../../../firebase";
+
 function HeaderApp() {
-  const { cart, user } = useGlobalContext();
+
+const user = auth.currentUser;
+  const { cart , sign_out_user } = useGlobalContext();
   return (
     <>
       <header>
@@ -54,50 +58,32 @@ function HeaderApp() {
 
           <div className='header-signin'>
             <p>
-              {user.auth ? `Hello, ${user.name}`: "Hello, sign in"}
+              <h4>{user ? `Hello, ${user.displayName}`: "Hello, sign in"}</h4>
             </p>
             <div className='header-signin-bottom-article'>
-              <h5>Account & Lists</h5>
+              <h5></h5>
               <BsFillCaretDownFill size={10}></BsFillCaretDownFill>
             </div>
+
             {/* Signin Hover */}
-            <div className='header-signin-card'>
-              {!user.auth && (
-                <>
-                  <div className='signin-btn'>
-                    <Link to={"/login"}>
-                      <button>Sign in</button>
-                    </Link>
-                  </div>
-                </>
-              )}
-              <div className='login-content'>
-              
-                <div>
-                  <h5>Your Accounts</h5>
-                  <p>
-                    {user.auth ? (
-                      <Link to={"/account"}>Account</Link>
-                    ) : (
-                      <Link to={"/login"}>Account</Link>
-                    )}
-                  </p>
-                  <p>
-                    {user.auth ? (
-                      <Link to={"/orders"}>Orders</Link>
-                    ) : (
-                      <Link to={"/login"}>Orders</Link>
-                    )}
-                  </p>
-                  
+            {user ? (<div className='header-signin-card'>
+                <div className='signin-btn'>
+                    <button onClick={() => sign_out_user()}>Sign Out</button>
+                </div>
+              </div>) : (
+              <div className='header-signin-card'>
+                <div className='signin-btn'>
+                  <Link to={"/login"}>
+                    <button>Sign in</button>
+                  </Link>
                 </div>
               </div>
-            </div>
+            )}
+
           </div>
           <div className='header-r-o'>
             <Link to={"/orders"}>
-              <p>Returns</p>
-              <h5>& Orders</h5>
+              <h4>Orders</h4>
             </Link>
           </div>
           <Link
@@ -106,7 +92,7 @@ function HeaderApp() {
             <div className='header-basket'>
               <BsCart2 size={30}></BsCart2>
               <span className='product-count'>{cart.length}</span>
-              <h5>Cart</h5>
+              <h4>Cart</h4>
             </div>
           </Link>
         </main>

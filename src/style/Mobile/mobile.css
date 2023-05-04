@@ -50,7 +50,6 @@
     align-items: flex-end;
     justify-content: center;
     cursor: pointer;
-    /* padding: 0; */
 }
 
 .mobile-header .info-menu .header-basket .product-count {

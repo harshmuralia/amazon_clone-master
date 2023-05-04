@@ -6,7 +6,7 @@ function Hero() {
   return (
     <>
       <HeroSlider />
-      <HeroProduct />
+      {/* <HeroProduct /> */}
     </>
   );
 }

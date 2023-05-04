@@ -12,9 +12,11 @@ import Menu from "@/components/menu/Menu";
 
 import AuthApp from "./AuthApp";
 
+import {auth} from "../../firebase"
+
 function OrderApp() {
   const { orders, user } = useGlobalContext();
-  if (!user.auth) {
+  if (!auth.currentUser) {
     return <AuthApp path={"/login"}></AuthApp>;
   } else {
     return (

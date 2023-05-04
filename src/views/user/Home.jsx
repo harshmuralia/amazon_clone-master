@@ -13,16 +13,8 @@ import { smartWatchProduct } from "@/data/ProductSlider/SmartWatch";
 
 import { chocolateProducts } from "@/data/ProductSlider/Chocolate";
 
-import PCRowThree from "@/components/prodcut-category/PCRowThree";
-
 import { backpackPorduct } from "@/data/ProductSlider/Backpack";
 
-// product category
-import PCRowOne from "@/components/prodcut-category/PCRowOne";
-
-import PCRowTwo from "@/components/prodcut-category/PCRowTwo";
-// product-row
-import ProductRow from "@/components/product-row/ProductRow";
 // products
 import { cameraProduct } from "@/data/ProductSlider/Camera";
 
@@ -36,6 +28,8 @@ import Menu from "@/components/menu/Menu";
 // hero
 import Hero from "@/components/hero/Hero";
 
+import App from "./get_data";
+
 
 
 
@@ -44,12 +38,13 @@ import Hero from "@/components/hero/Hero";
 function Home() {
   return (
     <>
-      {/* Template */}
+
       <Header />
       <Menu />
       <MobileHeaderApp />
       <Hero />
-      <ProductRow />
+      <App />
+
       
       <ProductSlider
         key={"books"}
@@ -60,7 +55,7 @@ function Home() {
         products={smartWatchProduct}
       />
 
-      <PCRowThree />
+
       <ProductSlider
         key={"runningshoes"}
         products={backpackPorduct}
@@ -73,8 +68,7 @@ function Home() {
         key={"chocolate"}
         products={chocolateProducts}
       />
-      {/* sponser img */}
-      <PCRowOne />
+     
       <ProductSlider
         key={"camera"}
         products={cameraProduct}
@@ -83,7 +77,7 @@ function Home() {
         key={"puddleboard"}
         products={puddleBoardProducts}
       />
-      <PCRowTwo />
+
       <ProductSlider
         key={"boostedboard"}
         products={boostedBoardProducts}

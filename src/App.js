@@ -19,6 +19,7 @@ import Home from "./views/user/Home";
 
 import Seller_login from "./views/seller/Seller_login_page";
 import Dashboard from "./views/seller/dashboard";
+import Add_product from "./views/seller/seller_addproduct"
 
 
 
@@ -35,7 +36,7 @@ function App() {
                     <Route path='/seller_login' element={<Seller_login/>} />
                     <Route path="/orders" element={<OrderApp />}></Route>
                     <Route path="/login" element={<LoginApp />}></Route>
-                    
+                    <Route path="/add_product" element={<Add_product />}></Route>
                     <Route path="/Seller_login" element={<Seller_login />}></Route>
 
                     <Route path="*" element={<ErrorPageApp />}></Route>

@@ -9,6 +9,8 @@ import { AppProvider } from "./context/useContext";
 import './style/index.css';
 
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 ReactDom.render(
     // <React.StrictMode>

@@ -11,10 +11,11 @@ import { useGlobalContext } from "@/context/useContext";
 import Menu from "@/components/menu/Menu";
 
 import AuthApp from "./AuthApp";
+import {auth} from "../../firebase"
 
 function AccountApp() {
   const { user } = useGlobalContext();
-  if (!user.auth) {
+  if (!auth.currentUser) {
     return <AuthApp path={"/login"}></AuthApp>;
   } else {
     return (
